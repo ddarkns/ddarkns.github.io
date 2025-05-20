@@ -874,65 +874,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // Create a single popup and overlay in body if not present
-        function ensurePopupElements() {
-            if (!document.getElementById('globalPopupOverlay')) {
-                var overlay = document.createElement('div');
-                overlay.className = 'popup-overlay';
-                overlay.id = 'globalPopupOverlay';
-                overlay.style.display = 'none';
-                document.body.appendChild(overlay);
-            }
-            if (!document.getElementById('globalPopupModal')) {
-                var popup = document.createElement('div');
-                popup.className = 'popuptext';
-                popup.id = 'globalPopupModal';
-                popup.style.display = 'none';
-                document.body.appendChild(popup);
-            }
-        }
-
-        // Show popup with imageSrc and alt text
-        function showPopup(imageSrc, altText) {
-            ensurePopupElements();
-            var overlay = document.getElementById('globalPopupOverlay');
-            var popup = document.getElementById('globalPopupModal');
-
-            // Remove previous content
-            popup.innerHTML = '';
-
-            // Add image
-            var img = document.createElement('img');
-            img.src = imageSrc;
-            img.alt = altText;
-            popup.appendChild(img);
-
-            // Add close button
-            var closeBtn = document.createElement('div');
-            closeBtn.className = 'popup-close';
-            closeBtn.innerHTML = '×';
-            closeBtn.onclick = function(e) {
-                e.stopPropagation();
-                overlay.style.display = 'none';
-                popup.style.display = 'none';
-            };
-            popup.appendChild(closeBtn);
-
-            // Show overlay and popup
-            overlay.style.display = 'block';
-            popup.style.display = 'flex';
-        }
-
-        // Hide popup when clicking overlay
-        document.addEventListener('DOMContentLoaded', function() {
-            ensurePopupElements();
-            var overlay = document.getElementById('globalPopupOverlay');
-            var popup = document.getElementById('globalPopupModal');
-            overlay.onclick = function() {
-                overlay.style.display = 'none';
-                popup.style.display = 'none';
-            };
-        });
+       
     </script>
 </body>
 </html>
