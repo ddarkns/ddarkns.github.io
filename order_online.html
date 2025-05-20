@@ -90,22 +90,27 @@
             color: #333;
         }
         header {
-          background-color: #ff6347;
-          color: white;
-          padding: 20px 0;
-          text-align: center;
+            background-color: #ff6347;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
         }
-    
         header h1 {
-          margin: 0;
-          font-size: 2.5em;
-          letter-spacing: 1px;
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 1px;
         }
-    
-        header p {
-          margin: 10px 0 0;
-          font-size: 1.2em;
-          font-style: italic;
+        .slogans {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        .slogan {
+            font-size: 1.2em;
+            font-style: italic;
+            margin: 0;
+            font-weight: 500;
         }
         nav {
             background-color: #333;
@@ -125,39 +130,95 @@
         }
         .container {
             padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
         .category {
-            margin-bottom: 40px;
+            margin-bottom: 60px;
+            padding: 0 20px;
         }
         .category h2 {
             background-color: #ff6347;
             color: white;
-            padding: 10px;
-            border-radius: 5px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            justify-items: center;
         }
         .menu-item {
             background-color: white;
-            margin: 20px 0;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
+            text-align: center;
+            width: 100%;
+            max-width: 280px;
+            transition: transform 0.2s ease;
+        }
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .menu-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         .menu-item h3 {
-            margin-top: 0;
+            color: #333;
+            margin: 0;
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+        .menu-item-content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 15px;
+            gap: 10px;
+        }
+        .menu-item-content p {
+            margin: 5px 0;
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+        .menu-item-content p:last-of-type {
+            color: #ff6347;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin: 10px 0;
         }
         .menu-item button {
             background-color: #ff6347;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 25px;
+            border-radius: 25px;
             cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 200px;
         }
         .menu-item button:hover {
             background-color: #ff4500;
+            transform: scale(1.05);
         }
         footer {
             background-color: #333;
@@ -230,329 +291,513 @@
         .home-button:hover {
             background-color: #555;
         }
+        /* Popup container */
+        .popup {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            margin: 5px 0;
+        }
+        
+        /* Popup text/image container */
+        .popup .popuptext {
+            visibility: hidden;
+            width: 80vw;  /* 80% of viewport width */
+            max-width: 95vw;  /* Prevent overflow on small screens */
+            min-width: 200px;
+            box-sizing: border-box;
+            margin: 2vw;
+            height: 80vh;  /* 80% of viewport height */
+            max-height: 800px;  /* Maximum height */
+            background-color: white;
+            color: #333;
+            text-align: center;
+            border-radius: 12px;
+            padding: 20px;
+            position: fixed;
+            z-index: 9999;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 2px solid #ff6347;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            filter: none !important; /* Remove any blur */
+            overflow: auto;
+        }
+        
+        /* Show popup */
+        .popup .show {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Popup image styles */
+        .popup .popuptext img {
+            max-width: 100%;
+            max-height: calc(80vh - 100px);  /* Leave space for close button and padding */
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+            opacity: 1 !important;  /* Force full opacity */
+            filter: none !important; /* Remove any blur */
+            box-shadow: 0 2px 16px rgba(0,0,0,0.15); /* Subtle shadow for clarity */
+        }
+
+        /* Close button for popup */
+        .popup-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: #ff6347;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 10000;  /* Ensure it's above the image */
+        }
+
+        .popup-close:hover {
+            background: #e74c3c;
+            transform: scale(1.1);
+        }
+
+        /* Overlay when popup is active */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.18);
+            z-index: 99998;
+        }
     </style>
 </head>
 <body>
     <header>
-        <br>
         <h1>PKJ FOODS</h1>
+        <div class="slogans">
+            
+        </div>
     </header>
-    <nav align="center">
+    <nav>
         <a href="our_branches.html">OUR BRANCHES</a>
         <a href="menu.html">MENU</a>
-        <a href="#about">ABOUT US</a>
-        <a href="#events">EVENTS</a>
+        <a href="index.html#about">ABOUT US</a>
+        <a href="index.html#events">EVENTS</a>
         <a href="order_online.html">ORDER ONLINE</a>
-        <a href="track_order.html">TRACK ORDER</a> 
+        <a href="track_order.html">TRACK ORDER</a>
         <a href="reservation.html">RESERVATIONS</a>
-  </nav>
+    </nav>
     <div class="container">
         <a href="index.html" class="home-button">Back to Homepage</a>
         
         <div class="category">
             <h2>Sides and Starters</h2>
-            <div class="menu-item">
-                <div>
+            <div class="menu-grid">
+                <div class="menu-item">
                     <h3>French Fries</h3>
-                    <p>Crispy golden fries served with ketchup</p>
-                    <p>$3.99</p>
+                    <img src="17.jpg" alt="French Fries">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Crispy golden fries with seasoning</p>
+                            <p>$3.99</p>
+                        </div>
+                        <button onclick="addToCart('French Fries', 3.99)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('French Fries', 3.99)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Peri Peri Fries</h3>
-                    <p>Spicy peri peri seasoned fries with dip</p>
-                    <p>$4.49</p>
+                    <img src="18.jpg" alt="Peri Peri Fries">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Spicy peri peri seasoned fries</p>
+                            <p>$4.49</p>
+                        </div>
+                        <button onclick="addToCart('Peri Peri Fries', 4.49)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Peri Peri Fries', 4.49)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Garlic Bread</h3>
-                    <p>Toasted bread with garlic butter and herbs</p>
-                    <p>$4.99</p>
+                    <img src="19.jpg" alt="Garlic Bread">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Toasted bread with garlic butter</p>
+                            <p>$4.99</p>
+                        </div>
+                        <button onclick="addToCart('Garlic Bread', 4.99)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Garlic Bread', 4.99)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Chicken Nuggets</h3>
-                    <p>Crispy fried chicken nuggets (6 pieces)</p>
-                    <p>$5.99</p>
+                    <img src="20.jpg" alt="Chicken Nuggets">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Crispy chicken nuggets with dipping sauce</p>
+                            <p>$5.99</p>
+                        </div>
+                        <button onclick="addToCart('Chicken Nuggets', 5.99)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Chicken Nuggets', 5.99)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Cheese Balls</h3>
-                    <p>Deep fried mozzarella cheese balls (8 pieces)</p>
-                    <p>$6.49</p>
+                    <img src="21.jpg" alt="Cheese Balls">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Deep fried mozzarella cheese balls (8 pieces)</p>
+                            <p>$6.49</p>
+                        </div>
+                        <button onclick="addToCart('Cheese Balls', 6.49)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Cheese Balls', 6.49)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Chicken Wings</h3>
-                    <p>Spicy buffalo wings with blue cheese dip (8 pieces)</p>
-                    <p>$7.99</p>
+                    <img src="22.jpg" alt="Chicken Wings">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Spicy buffalo wings with blue cheese dip (8 pieces)</p>
+                            <p>$7.99</p>
+                        </div>
+                        <button onclick="addToCart('Chicken Wings', 7.99)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Chicken Wings', 7.99)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
-                    <h3>Chicken Popcorn</h3>
-                    <p>Crispy bite-sized chicken popcorn (10 pieces)</p>
-                    <p>$5.49</p>
-                </div>
-                <button onclick="addToCart('Chicken Popcorn', 5.49)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Onion Rings</h3>
-                    <p>Crispy battered onion rings with BBQ sauce</p>
-                    <p>$4.99</p>
+                    <img src="23.jpg" alt="Onion Rings">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Crispy battered onion rings with BBQ sauce</p>
+                            <p>$4.99</p>
+                        </div>
+                        <button onclick="addToCart('Onion Rings', 4.99)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Onion Rings', 4.99)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Potato Wedges</h3>
-                    <p>Seasoned potato wedges with sour cream dip</p>
-                    <p>$4.99</p>
+                    <img src="24.jpg" alt="Potato Wedges">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Seasoned potato wedges with sour cream dip</p>
+                            <p>$4.99</p>
+                        </div>
+                        <button onclick="addToCart('Potato Wedges', 4.99)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Potato Wedges', 4.99)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Mozzarella Sticks</h3>
-                    <p>Fried mozzarella sticks with marinara sauce (6 pieces)</p>
-                    <p>$6.99</p>
+                    <img src="25.jpg" alt="Mozzarella Sticks">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Crispy mozzarella sticks with marinara sauce</p>
+                            <p>$6.99</p>
+                        </div>
+                        <button onclick="addToCart('Mozzarella Sticks', 6.99)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Mozzarella Sticks', 6.99)">Add to Cart</button>
             </div>
         </div>
         <div class="category">
             <h2>Burgers</h2>
-            <div class="menu-item">
-                <div>
+            <div class="menu-grid">
+                <div class="menu-item">
                     <h3>Classic Cheeseburger</h3>
-                    <p>A classic cheeseburger with lettuce, tomato, and our special sauce.</p>
-                    <p>$5.99</p>
+                    <img src="1.png" alt="Classic Cheeseburger">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Juicy beef patty with cheese, lettuce, and special sauce</p>
+                            <p>$5.99</p>
+                        </div>
+                        <button onclick="addToCart('Classic Cheeseburger', 5.99)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Classic Cheeseburger', 5.99)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Bacon Burger</h3>
-                    <p>Juicy beef patty with crispy bacon and cheddar cheese.</p>
-                    <p>$6.99</p>
+                    <img src="2.jpg" alt="Bacon Burger">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Classic burger with crispy bacon and BBQ sauce</p>
+                            <p>$6.99</p>
+                        </div>
+                        <button onclick="addToCart('Bacon Burger', 6.99)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Bacon Burger', 6.99)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Veggie Burger</h3>
-                    <p>A delicious veggie patty with fresh vegetables.</p>
-                    <p>$5.49</p>
+                    <img src="3.jpg" alt="Veggie Burger">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Plant-based patty with fresh vegetables</p>
+                            <p>$5.49</p>
+                        </div>
+                        <button onclick="addToCart('Veggie Burger', 5.49)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Veggie Burger', 5.49)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Double Cheeseburger</h3>
-                    <p>Double the beef, double the cheese.</p>
-                    <p>$7.99</p>
+                    <img src="4.jpg" alt="Double Cheeseburger">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Two beef patties with double cheese</p>
+                            <p>$7.99</p>
+                        </div>
+                        <button onclick="addToCart('Double Cheeseburger', 7.99)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Double Cheeseburger', 7.99)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Spicy Chicken Burger</h3>
-                    <p>Spicy chicken patty with lettuce and mayo.</p>
-                    <p>$6.49</p>
+                    <img src="5.jpg" alt="Spicy Chicken Burger">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Spicy chicken patty with lettuce and mayo</p>
+                            <p>$6.49</p>
+                        </div>
+                        <button onclick="addToCart('Spicy Chicken Burger', 6.49)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Spicy Chicken Burger', 6.49)">Add to Cart</button>
             </div>
         </div>
 
         <!-- Pizzas -->
         <div class="category">
             <h2>Pizzas</h2>
-            <div class="menu-item">
-                <div>
+            <div class="menu-grid">
+                <div class="menu-item">
                     <h3>Pepperoni Pizza</h3>
-                    <p>Classic pepperoni pizza with a crispy crust.</p>
-                    <p>$8.99</p>
+                    <img src="6.jpg" alt="Pepperoni Pizza">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Classic pepperoni pizza with a crispy crust</p>
+                            <p>$8.99</p>
+                        </div>
+                        <button onclick="addToCart('Pepperoni Pizza', 8.99)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Pepperoni Pizza', 8.99)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Margherita Pizza</h3>
-                    <p>Tomato, mozzarella, and fresh basil.</p>
-                    <p>$7.99</p>
+                    <img src="7.jpg" alt="Margherita Pizza">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Tomato, mozzarella, and fresh basil</p>
+                            <p>$7.99</p>
+                        </div>
+                        <button onclick="addToCart('Margherita Pizza', 7.99)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Margherita Pizza', 7.99)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>BBQ Chicken Pizza</h3>
-                    <p>BBQ sauce, chicken, and onions.</p>
-                    <p>$9.99</p>
+                    <img src="8.jpg" alt="BBQ Chicken Pizza">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>BBQ sauce, chicken, and onions</p>
+                            <p>$9.99</p>
+                        </div>
+                        <button onclick="addToCart('BBQ Chicken Pizza', 9.99)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('BBQ Chicken Pizza', 9.99)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Vegetable Pizza</h3>
-                    <p>Topped with a variety of fresh vegetables.</p>
-                    <p>$8.49</p>
+                    <img src="10.jpg" alt="Vegetable Pizza">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Topped with a variety of fresh vegetables</p>
+                            <p>$8.49</p>
+                        </div>
+                        <button onclick="addToCart('Vegetable Pizza', 8.49)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Vegetable Pizza', 8.49)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Hawaiian Pizza</h3>
-                    <p>Ham, pineapple, and mozzarella.</p>
-                    <p>$9.49</p>
+                    <img src="11.jpg" alt="Hawaiian Pizza">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Ham, pineapple, and mozzarella</p>
+                            <p>$9.49</p>
+                        </div>
+                        <button onclick="addToCart('Hawaiian Pizza', 9.49)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Hawaiian Pizza', 9.49)">Add to Cart</button>
             </div>
         </div>
 
         <!-- Sandwiches -->
         <div class="category">
             <h2>Sandwiches</h2>
-            <div class="menu-item">
-                <div>
+            <div class="menu-grid">
+                <div class="menu-item">
                     <h3>Grilled Chicken Sandwich</h3>
-                    <p>Grilled chicken breast with lettuce, tomato, and mayo.</p>
-                    <p>$6.99</p>
+                    <img src="12.jpg" alt="Grilled Chicken Sandwich">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Grilled chicken breast with lettuce, tomato, and mayo</p>
+                            <p>$6.99</p>
+                        </div>
+                        <button onclick="addToCart('Grilled Chicken Sandwich', 6.99)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Grilled Chicken Sandwich', 6.99)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Turkey Club Sandwich</h3>
-                    <p>Turkey, bacon, lettuce, tomato, and mayo.</p>
-                    <p>$7.49</p>
+                    <img src="13.jpg" alt="Turkey Club Sandwich">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Turkey, bacon, lettuce, tomato, and mayo</p>
+                            <p>$7.49</p>
+                        </div>
+                        <button onclick="addToCart('Turkey Club Sandwich', 7.49)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Turkey Club Sandwich', 7.49)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Veggie Sandwich</h3>
-                    <p>Fresh vegetables with hummus.</p>
-                    <p>$5.99</p>
+                    <img src="14.jpg" alt="Veggie Sandwich">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Fresh vegetables with hummus</p>
+                            <p>$5.99</p>
+                        </div>
+                        <button onclick="addToCart('Veggie Sandwich', 5.99)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Veggie Sandwich', 5.99)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>BLT Sandwich</h3>
-                    <p>Bacon, lettuce, and tomato with mayo.</p>
-                    <p>$6.49</p>
+                    <img src="15.jpg" alt="BLT Sandwich">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Bacon, lettuce, and tomato with mayo</p>
+                            <p>$6.49</p>
+                        </div>
+                        <button onclick="addToCart('BLT Sandwich', 6.49)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('BLT Sandwich', 6.49)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
+                <div class="menu-item">
                     <h3>Philly Cheesesteak</h3>
-                    <p>Thinly sliced beef with melted cheese and onions.</p>
-                    <p>$8.99</p>
+                    <img src="16.jpg" alt="Philly Cheesesteak">
+                    <div class="menu-item-content">
+                        <div>
+                            <p>Thinly sliced steak with melted cheese and onions</p>
+                            <p>$8.99</p>
+                        </div>
+                        <button onclick="addToCart('Philly Cheesesteak', 8.99)">Add to Cart</button>
+                    </div>
                 </div>
-                <button onclick="addToCart('Philly Cheesesteak', 8.99)">Add to Cart</button>
             </div>
         </div>
 
         <!-- Juices -->
         <div class="category">
             <h2>Juices</h2>
-            <div class="menu-item">
-                <div>
-                    <h3>Orange Juice</h3>
-                    <p>Freshly squeezed orange juice.</p>
-                    <p>$3.99</p>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div>
+                        <h3>Orange Juice</h3>
+                        <img src="26.jpg" alt="BLT Sandwich">
+                        <p>Freshly squeezed orange juice.</p>
+                        <p>$3.99</p>
+                    </div>
+                    <button onclick="addToCart('Orange Juice', 3.99)">Add to Cart</button>
                 </div>
-                <button onclick="addToCart('Orange Juice', 3.99)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
-                    <h3>Apple Juice</h3>
-                    <p>100% pure apple juice.</p>
-                    <p>$3.49</p>
+                <div class="menu-item">
+                    <div>
+                        <h3>Apple Juice</h3>
+                        <img src="27.jpg" alt="BLT Sandwich">
+                        <p>100% pure apple juice.</p>
+                        <p>$3.49</p>
+                    </div>
+                    <button onclick="addToCart('Apple Juice', 3.49)">Add to Cart</button>
                 </div>
-                <button onclick="addToCart('Apple Juice', 3.49)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
-                    <h3>Carrot Juice</h3>
-                    <p>Freshly made carrot juice.</p>
-                    <p>$4.49</p>
+                <div class="menu-item">
+                    <div>
+                        <h3>Carrot Juice</h3>
+                        <img src="28.jpg" alt="BLT Sandwich">
+                        <p>Freshly made carrot juice.</p>
+                        <p>$4.49</p>
+                    </div>
+                    <button onclick="addToCart('Carrot Juice', 4.49)">Add to Cart</button>
                 </div>
-                <button onclick="addToCart('Carrot Juice', 4.49)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
-                    <h3>Pineapple Juice</h3>
-                    <p>Sweet and tangy pineapple juice.</p>
-                    <p>$4.99</p>
+                <div class="menu-item">
+                    <div>
+                        <h3>Pineapple Juice</h3>
+                        <img src="29.jpg" alt="BLT Sandwich">
+                        <p>Sweet and tangy pineapple juice.</p>
+                        <p>$4.99</p>
+                    </div>
+                    <button onclick="addToCart('Pineapple Juice', 4.99)">Add to Cart</button>
                 </div>
-                <button onclick="addToCart('Pineapple Juice', 4.99)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <div>
-                    <h3>Mixed Berry Juice</h3>
-                    <p>A blend of strawberries, blueberries, and raspberries.</p>
-                    <p>$5.49</p>
+                <div class="menu-item">
+                    <div>
+                        <h3>Mixed Berry Juice</h3>
+                        <img src="30.jpg" alt="BLT Sandwich">
+                        <p>A blend of strawberries, blueberries, and raspberries.</p>
+                        <p>$5.49</p>
+                    </div>
+                    <button onclick="addToCart('Mixed Berry Juice', 5.49)">Add to Cart</button>
                 </div>
-                <button onclick="addToCart('Mixed Berry Juice', 5.49)">Add to Cart</button>
             </div>
         </div>
 
         
             <div class="category">
                 <h2>Desserts</h2>
-                <div class="menu-item">
-                    <div>
-                        <h3>Chocolate Cake</h3>
-                        <p>Rich and moist chocolate cake.</p>
-                        <p>$4.99</p>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div>
+                            <h3>Chocolate Cake</h3>
+                            <img src="31.jpg" alt="BLT Sandwich">
+                            <p>Rich and moist chocolate cake.</p>
+                            <p>$4.99</p>
+                        </div>
+                        <button onclick="addToCart('Chocolate Cake', 4.99)">Add to Cart</button>
                     </div>
-                    <button onclick="addToCart('Chocolate Cake', 4.99)">Add to Cart</button>
-                </div>
-                <div class="menu-item">
-                    <div>
-                        <h3>Cheesecake</h3>
-                        <p>Creamy cheesecake with a graham cracker crust.</p>
-                        <p>$5.49</p>
+                    <div class="menu-item">
+                        <div>
+                            <h3>Cheesecake</h3>
+                            <img src="32.jpg" alt="BLT Sandwich">
+                            <p>Creamy cheesecake with a graham cracker crust.</p>
+                            <p>$5.49</p>
+                        </div>
+                        <button onclick="addToCart('Cheesecake', 5.49)">Add to Cart</button>
                     </div>
-                    <button onclick="addToCart('Cheesecake', 5.49)">Add to Cart</button>
-                </div>
-                <div class="menu-item">
-                    <div>
-                        <h3>Apple Pie</h3>
-                        <p>Classic apple pie with a flaky crust.</p>
-                        <p>$4.99</p>
+                    <div class="menu-item">
+                        <div>
+                            <h3>Apple Pie</h3>
+                            <img src="33.jpg" alt="BLT Sandwich">
+                            <p>Classic apple pie with a flaky crust.</p>
+                            <p>$4.99</p>
+                        </div>
+                        <button onclick="addToCart('Apple Pie', 4.99)">Add to Cart</button>
                     </div>
-                    <button onclick="addToCart('Apple Pie', 4.99)">Add to Cart</button>
-                </div>
-                <div class="menu-item">
-                    <div>
-                        <h3>Ice Cream Sundae</h3>
-                        <p>Vanilla ice cream with chocolate sauce and nuts.</p>
-                        <p>$3.99</p>
+                    <div class="menu-item">
+                        <div>
+                            <h3>Ice Cream Sundae</h3>
+                            <img src="34.jpg" alt="BLT Sandwich">
+                            <p>Vanilla ice cream with chocolate sauce and nuts.</p>
+                            <p>$3.99</p>
+                        </div>
+                        <button onclick="addToCart('Ice Cream Sundae', 3.99)">Add to Cart</button>
                     </div>
-                    <button onclick="addToCart('Ice Cream Sundae', 3.99)">Add to Cart</button>
-                </div>
-                <div class="menu-item">
-                    <div>
-                        <h3>Tiramisu</h3>
-                        <p>Classic Italian dessert with coffee and mascarpone.</p>
-                        <p>$5.99</p>
+                    <div class="menu-item">
+                        <div>
+                            <h3>Tiramisu</h3>
+                            <img src="35.jpg" alt="BLT Sandwich">
+                            <p>Classic Italian dessert with coffee and mascarpone.</p>
+                            <p>$5.99</p>
+                        </div>
+                        <button onclick="addToCart('Tiramisu', 5.99)">Add to Cart</button>
                     </div>
-                    <button onclick="addToCart('Tiramisu', 5.99)">Add to Cart</button>
                 </div>
             </div>
     </div>
@@ -696,6 +941,66 @@ document.addEventListener('DOMContentLoaded', function() {
                     sendMessage();
                 }
             });
+        });
+
+        // Create a single popup and overlay in body if not present
+        function ensurePopupElements() {
+            if (!document.getElementById('globalPopupOverlay')) {
+                var overlay = document.createElement('div');
+                overlay.className = 'popup-overlay';
+                overlay.id = 'globalPopupOverlay';
+                overlay.style.display = 'none';
+                document.body.appendChild(overlay);
+            }
+            if (!document.getElementById('globalPopupModal')) {
+                var popup = document.createElement('div');
+                popup.className = 'popuptext';
+                popup.id = 'globalPopupModal';
+                popup.style.display = 'none';
+                document.body.appendChild(popup);
+            }
+        }
+
+        // Show popup with imageSrc and alt text
+        function showPopup(imageSrc, altText) {
+            ensurePopupElements();
+            var overlay = document.getElementById('globalPopupOverlay');
+            var popup = document.getElementById('globalPopupModal');
+
+            // Remove previous content
+            popup.innerHTML = '';
+
+            // Add image
+            var img = document.createElement('img');
+            img.src = imageSrc;
+            img.alt = altText;
+            popup.appendChild(img);
+
+            // Add close button
+            var closeBtn = document.createElement('div');
+            closeBtn.className = 'popup-close';
+            closeBtn.innerHTML = '×';
+            closeBtn.onclick = function(e) {
+                e.stopPropagation();
+                overlay.style.display = 'none';
+                popup.style.display = 'none';
+            };
+            popup.appendChild(closeBtn);
+
+            // Show overlay and popup
+            overlay.style.display = 'block';
+            popup.style.display = 'flex';
+        }
+
+        // Hide popup when clicking overlay
+        document.addEventListener('DOMContentLoaded', function() {
+            ensurePopupElements();
+            var overlay = document.getElementById('globalPopupOverlay');
+            var popup = document.getElementById('globalPopupModal');
+            overlay.onclick = function() {
+                overlay.style.display = 'none';
+                popup.style.display = 'none';
+            };
         });
     </script>
 </body>
