@@ -1,3 +1,217 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+Expand
+message.txt13 KB
+<p>
+          <div class="popup" onclick="myFunction()">cake
+            <span class="popuptext" id="myPopup"><img src="cake.jpg"></span>
+          </div>
+
+          <div class="popup" onclick="myFunction()">"Cheesecake"---price: 5.49
+            <span class="popuptext" id="myPopup"><img src="cake.jpg"></span>
+          </div>
+           <div class="popup" onclick="myFunction()"> "Apple Pie"---price: 4.99
+            <span class="popuptext" id="myPopup"><img src="cake.jpg"></span>
+          </div>
+          <div class="popup" onclick="myFunction()"> Ice Cream Sundae"---price: 3.99
+            <span class="popuptext" id="myPopup"><img src="cake.jpg"></span>
+          </div>
+              <div class="popup" onclick="myFunction()"> "Tiramisu"---price: 5.99
+            <span class="popuptext" id="myPopup"><img src="cake.jpg"></span>
+              </div>
+
+       </p>
+    </div>
+
+    <div class="hard">Thank You <small>~ PRANAV-JAYAVEER-KRISHNA</small></div>
+    <div class="hard">
+      <p style="text-align: center; margin-top: 50px;">
+        <a href="order_online.html" style="text-decoration: none; color: #ff6347; font-weight: bold; display: block; margin-bottom: 20px; font-size: 18px;">ORDER ONLINE</a>
+        <a href="track_order.html" style="text-decoration: none; color: #ff6347; font-weight: bold; display: block; margin-bottom: 20px; font-size: 18px;">TRACK ORDER</a>
+        <a href="index.html" style="text-decoration: none; color: #ff6347; font-weight: bold; display: block; font-size: 18px;">BACK TO HOMEPAGE</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="jquery.js"></script>
+  <script src="turn.js"></script>
+  <script>
+    $(".flipbook").turn();
+    function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+  </script>
+</body>
+
+</html>
+ddarkns started a call that lasted an hour.
+ — 
+Yesterday at 20:53
+ddarkns
+ — 
+Yesterday at 21:20
+Image
+ddarkns
+ — 
+Yesterday at 21:33
+Image
+Image
+Image
+Image
+Image
+ddarkns
+ — 
+Yesterday at 21:41
+Image
+Image
+ddarkns
+ — 
+Yesterday at 21:50
+Image
+Image
+Image
+ddarkns
+ — 
+Yesterday at 21:53
+try this
+Blaze
+ — 
+08:34
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>PKJ FOODS - Menu</title>
+  <style>
+    /* Additional styles for menu item popups */
+    .menu-item {
+      cursor: pointer;
+      color: #ff6347;
+      text-decoration: underline;
+      display: inline-block;
+      padding: 2px 5px;
+    }
+    
+    /* Popup container */
+    .popup {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      margin: 5px 0;
+    }
+    
+    /* Popup text/image container */
+    .popup .popuptext {
+      visibility: hidden;
+      width: 80vw;  /* 80% of viewport width */
+      max-width: 95vw;  /* Prevent overflow on small screens */
+      min-width: 200px;
+      box-sizing: border-box;
+      margin: 2vw;
+      height: 80vh;  /* 80% of viewport height */
+      max-height: 800px;  /* Maximum height */
+      background-color: white;
+      color: #333;
+      text-align: center;
+      border-radius: 12px;
+      padding: 20px;
+      position: fixed;
+      z-index: 9999;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      border: 2px solid #ff6347;
+      opacity: 0;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      filter: none !important; /* Remove any blur */
+      overflow: auto;
+    }
+    
+    /* Popup arrow - removed as it's not needed with centered positioning */
+    
+    /* Show popup */
+    .popup .show {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    /* Popup image styles */
+    .popup .popuptext img {
+      max-width: 100%;
+      max-height: calc(80vh - 100px);  /* Leave space for close button and padding */
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      opacity: 1 !important;  /* Force full opacity */
+      filter: none !important; /* Remove any blur */
+      box-shadow: 0 2px 16px rgba(0,0,0,0.15); /* Subtle shadow for clarity */
+    }
+
+    /* Close button for popup */
+    .popup-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 40px;
+      height: 40px;
+      background: #ff6347;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 40px;
+      cursor: pointer;
+      font-size: 24px;
+      font-weight: bold;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      z-index: 10000;  /* Ensure it's above the image */
+    }
+
+... (355 lines left)
+
+Collapse
+menu.html16 KB
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+Expand
+style.css9 KB
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+
+Expand
+order_online.html38 KB
+﻿
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -451,4 +665,4 @@
   </script>
 </body>
 
-</html>
+</html> 
